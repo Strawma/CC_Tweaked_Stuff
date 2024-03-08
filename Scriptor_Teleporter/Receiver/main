@@ -1,11 +1,12 @@
 os.loadAPI("strawma_api.lua")
 local MODEM = "right"
-local CHANNEL = strawma_api.getChannel()
+local PROTOCOL = strawma_api.getProtocol()
+local NAME = strawma_api.tryReadWriteFile("NAME.txt", "Enter location name: ")
 
 rednet.open(MODEM)
 while true do
-    local id, cmd, channel = rednet.receive()
-    if channel == CHANNEL then
+    local id, cmd, location = rednet.receive()
+    if location == PROTOCOL .. NAME then
         print("Received command: " .. cmd)
         if cmd == "tp" then
             turtle.select(16)

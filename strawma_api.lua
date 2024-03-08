@@ -1,9 +1,9 @@
-function getChannel()
-    local fileName = "CHANNEL.txt"
+function getProtocol()
+    local fileName = "PROTOCOL.txt"
     local file = fs.open(fileName, "r")
-    local channel = file.readLine()
+    local protocol = file.readLine()
     file.close()
-    return channel
+    return protocol
 end
 
 function tryReadWriteFile(fileName, writePrompt)
