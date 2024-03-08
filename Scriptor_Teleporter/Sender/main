@@ -1,4 +1,4 @@
-os.loadAPI("strawma_api")
+os.loadAPI("strawma_api.lua")
 
 local CHANNEL = strawma_api.getChannel()
 local MODEM = "back"
