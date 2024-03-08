@@ -11,6 +11,8 @@ function sendCmd(cmd)
 end
 
 while true do
+    term.clear()
+    term.setCursorPos(1, 1)
     write("Enter command: ")
     local cmd = read()
     if cmd == "exit" then
