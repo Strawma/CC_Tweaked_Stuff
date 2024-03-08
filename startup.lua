@@ -24,7 +24,7 @@ local function getMainUrl()
     local fileName = "MAIN_URL.txt"
     local url = strawma_api.tryReadFile(fileName)
     if url == nil then
-        url = args[1]
+        url = arg[1]
     end
 end
 
