@@ -15,7 +15,7 @@ local function discoverRequest()
     local found = {}
     rednet.broadcast("discover", PROTOCOL)
     while true do
-        local id, name, protocol = rednet.receive(timeout - os.clock())
+        local id, name, protocol = rednet.receive()
         local event, id = os.pullEvent()
         if id == timerID then
             break
