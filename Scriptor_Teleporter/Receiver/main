@@ -1,16 +1,20 @@
+os.loadAPI("strawma-api.lua")
 local MODEM = "right"
+local CHANNEL = strawma-api.getChannel()
 
 rednet.open(MODEM)
 while true do
-    local id, cmd = rednet.receive()
-    print("Received command: " .. cmd)
-    if cmd == "tp" then
-        turtle.select(16)
-        turtle.dig()
-        turtle.suck()
-        turtle.dropUp()
-        turtle.select(1)
+    local id, cmd, channel = rednet.receive()
+    if channel == CHANNEL then
+        print("Received command: " .. cmd)
+        if cmd == "tp" then
+            turtle.select(16)
+            turtle.dig()
+            turtle.suck()
+            turtle.dropUp()
+            turtle.select(1)
+        end
+        turtle.refuel()
+        print ("Current fuel level: " .. turtle.getFuelLevel())
     end
-    turtle.refuel()
-    print ("Current fuel level: " .. turtle.getFuelLevel())
 end

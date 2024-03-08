@@ -1,11 +1,13 @@
-local TURTLE_ID = 1
+os.loadAPI("strawma-api.lua")
+
+local CHANNEL = strawma-api.getChannel()
 local MODEM = "back"
 
 rednet.open(MODEM)
 
 
 function sendCmd(cmd)
-        rednet.send(TURTLE_ID, cmd)
+        rednet.broadcast(cmd, CHANNEL)
 end
 
 while true do
