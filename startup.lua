@@ -1,5 +1,5 @@
 local url = ""
-local file = "exampleFile.lua"
+local file = "main.lua"
 
 local function download(url, file)
     if fs.exists(file) then
