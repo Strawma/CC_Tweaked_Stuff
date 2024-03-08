@@ -16,8 +16,6 @@ local function setChannel()
         file.close()
         if tonumber(channel) then
             validChannel = true
-        else
-            print("Invalid channel number " + channel)
         end
     end
     if not validChannel then
