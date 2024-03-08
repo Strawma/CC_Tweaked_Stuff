@@ -16,15 +16,14 @@ local function discoverRequest()
     rednet.broadcast("discover", PROTOCOL)
     while true do
         local id, name, protocol = rednet.receive()
+        if protocol == PROTOCOL .. "discovery_response" then
+            table.insert(found, name)
+        end
         local event, id = os.pullEvent("timer")
         if id == timerID then
             break
         end
-        if protocol == PROTOCOL .. "discovery_response" then
-            table.insert(found, name)
-        end
     end
-    strawma_api.refresh()
     if #found == 0 then
         return "No locations found"
     else
