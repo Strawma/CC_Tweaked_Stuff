@@ -5,8 +5,7 @@ local MODEM = "back"
 
 rednet.open(MODEM)
 
-
-function teleportRequest(location)
+local function teleportRequest(location)
     rednet.broadcast("tp", PROTOCOL .. location)
 end
 
