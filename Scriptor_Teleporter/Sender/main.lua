@@ -10,10 +10,10 @@ local function teleportRequest(location)
 end
 
 local function discoverRequest()
+    print("Discovering locations...")
     local timeout = 3
     local found = {}
     rednet.broadcast("discover", PROTOCOL)
-    print("Discovering locations...")
     while os.clock() < timeout do
         local id, name, protocol = rednet.receive(timeout - os.clock())
         if protocol == PROTOCOL .. "discovery_response" then
@@ -29,6 +29,7 @@ local function discoverRequest()
             print(i .. ": " .. name)
         end
     end
+    print()
 end
 
 while true do
