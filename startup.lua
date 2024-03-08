@@ -1,4 +1,7 @@
-local url = ""
+-- Grab using
+-- wget https://raw.githubusercontent.com/Strawma/CC_Tweaked_Stuff/main/startup.lua
+
+local url = "" --url goes here
 local file = "main.lua"
 
 local function download(url, file)
