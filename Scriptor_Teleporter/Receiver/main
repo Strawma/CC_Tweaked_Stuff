@@ -1,6 +1,6 @@
-os.loadAPI("strawma-api.lua")
+os.loadAPI("strawma_api")
 local MODEM = "right"
-local CHANNEL = strawma-api.getChannel()
+local CHANNEL = strawma_api.getChannel()
 
 rednet.open(MODEM)
 while true do
