@@ -20,7 +20,7 @@ local function discoverRequest()
             table.insert(found, name)
         end
     end
-    term.clear()
+    strawma_api.refresh()
     if #found == 0 then
         print("No locations found")
     else
@@ -33,8 +33,7 @@ local function discoverRequest()
 end
 
 while true do
-    term.clear()
-    term.setCursorPos(1, 1)
+    strawma_api.refresh()
 
     discoverRequest()
 

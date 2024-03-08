@@ -39,3 +39,8 @@ function download(url, file)
     end
     shell.run("wget", url, file)
 end
+
+function refresh()
+    term.clear()
+    term.setCursorPos(1, 1)
+end
