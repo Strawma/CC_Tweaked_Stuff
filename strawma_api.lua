@@ -6,13 +6,20 @@ function getProtocol()
     return protocol
 end
 
-function tryReadWriteFile(fileName, writePrompt)
+function tryReadFile(fileName)
     local content
     if fs.exists(fileName) then
         local file = fs.open(fileName, "r")
         content = file.readAll()
         file.close()
-    else
+        return content
+    end
+    return nil
+end
+
+function tryReadWriteFile(fileName, writePrompt)
+    local content = tryReadFile(fileName)
+    if content == nil then
         local file = fs.open(fileName, "w")
         write(writePrompt)
         content = read()

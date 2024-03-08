@@ -1,6 +1,3 @@
-local mainUrl -- URL Goes Here
-
----------------------------------------------------
 local mainFile = "main.lua"
 
 local apiUrl = "https://raw.githubusercontent.com/Strawma/CC_Tweaked_Stuff/main/strawma_api.lua"
@@ -23,5 +20,14 @@ end
 
 setProtocol()
 
+local function getMainUrl()
+    local fileName = "MAIN_URL.txt"
+    local url = strawma_api.tryReadFile(fileName)
+    if url == nil then
+        url = args[1]
+    end
+end
+
+local mainUrl = getMainUrl()
 download(mainUrl, mainFile)
 shell.run(mainFile)
