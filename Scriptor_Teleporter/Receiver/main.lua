@@ -15,7 +15,5 @@ while true do
             turtle.dropUp()
             turtle.select(1)
         end
-        turtle.refuel()
-        print ("Current fuel level: " .. turtle.getFuelLevel())
     end
 end
