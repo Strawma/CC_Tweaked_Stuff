@@ -11,4 +11,6 @@ Allows you to trigger a scriptor self-teleport rune remotely
   pastebin run 7CdhgRRq
   ```
 - Receiver script:
-    pastebin run iEFSaTth
+  ```CraftOS
+  pastebin run iEFSaTth
+  ```
