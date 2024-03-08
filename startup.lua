@@ -17,7 +17,7 @@ download(apiUrl, apiFile)
 os.loadAPI(apiFile)
 
 local function setProtocol()
-    local fileName = "Protocol.txt"
+    local fileName = "PROTOCOL.txt"
     strawma_api.tryReadWriteFile(fileName, "Enter protocol: ")
 end
 
