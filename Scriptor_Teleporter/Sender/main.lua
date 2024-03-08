@@ -13,12 +13,14 @@ local function discoverRequest()
     local timeout = 3
     local found = {}
     rednet.broadcast("discover", PROTOCOL)
+    print("Discovering locations...")
     while os.clock() < timeout do
         local id, name, protocol = rednet.receive(timeout - os.clock())
         if protocol == PROTOCOL .. "discovery_response" then
             table.insert(found, name)
         end
     end
+    term.clear()
     if #found == 0 then
         print("No locations found")
     else

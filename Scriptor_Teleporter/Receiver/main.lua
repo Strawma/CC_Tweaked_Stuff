@@ -6,7 +6,7 @@ local NAME = strawma_api.tryReadWriteFile("NAME.txt", "Enter location name: ")
 rednet.open(MODEM)
 while true do
     local id, cmd, location = rednet.receive()
-    if location == PROTOCOL & cmd == "discover" then
+    if location == PROTOCOL and cmd == "discover" then
         print("Received discover request")
         rednet.send(id, NAME, PROTOCOL .. "discovery_response")
     elseif location == PROTOCOL .. NAME then
