@@ -7,31 +7,15 @@ local file = "main.lua"
 local apiUrl = "https://raw.githubusercontent.com/Strawma/CC_Tweaked_Stuff/main/strawma_api.lua"
 local apiFile = "strawma_api.lua"
 
-local function setChannel()
-    local fileName = "CHANNEL.txt"
-    local validChannel = false
-    if fs.exists(fileName) then
-        local file = fs.open(fileName, "r")
-        local channel = file.readLine()
-        file.close()
-        if tonumber(channel) then
-            validChannel = true
-        end
-    end
-    if not validChannel then
-        local file = fs.open(fileName, "w")
-        local channel
-        repeat
-            write("Enter the channel number: ")
-            channel = read()
-            print()
-        until tonumber(channel)
-        file.write(channel)
-        file.close()
-    end
+download(apiUrl, apiFile)
+os.loadAPI(apiFile)
+
+local function setProtocol()
+    local fileName = "Protocol.txt"
+    apiFile.tryReadWriteFile(fileName, "Enter protocol: ")
 end
 
-setChannel()
+setProtocol()
 
 local function download(url, file)
     if fs.exists(file) then
@@ -40,6 +24,5 @@ local function download(url, file)
     shell.run("wget", url, file)
 end
 
-download(apiUrl, apiFile)
 download(url, file)
 shell.run(file)
