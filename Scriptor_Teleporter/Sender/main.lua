@@ -11,7 +11,7 @@ end
 local function discoverRequest()
     strawma_api.refresh()
     print("Discovering locations...")
-    local timerID = os.startTimer(5)
+    local timerID = os.startTimer(3)
     local found = {}
     rednet.broadcast("discover", PROTOCOL)
     while true do
