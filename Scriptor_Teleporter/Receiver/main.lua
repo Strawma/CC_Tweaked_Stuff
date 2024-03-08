@@ -13,8 +13,8 @@ while true do
         print("Received command: " .. cmd)
         if cmd == "tp" then
             turtle.select(16)
-            turtle.dig()
-            turtle.suck()
+            turtle.digDown()
+            turtle.suckDown()
             turtle.dropUp()
             turtle.select(1)
         end
