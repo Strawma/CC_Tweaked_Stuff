@@ -18,14 +18,14 @@ os.loadAPI(apiFile)
 
 local function setProtocol()
     local fileName = "Protocol.txt"
-    apiFile.tryReadWriteFile(fileName, "Enter protocol: ")
+    strawma_api.tryReadWriteFile(fileName, "Enter protocol: ")
 end
 
 setProtocol()
 
 local function getUrl() 
     local fileName = "MAINURL.txt"
-    return apiFile.tryReadWriteFile(fileName, "Enter main.lua url: ")
+    return strawma_api.tryReadWriteFile(fileName, "Enter main.lua url: ")
 end
 
 local url = getUrl()
