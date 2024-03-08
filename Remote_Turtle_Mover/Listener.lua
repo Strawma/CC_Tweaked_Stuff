@@ -6,8 +6,8 @@ while true do
         turtle.forward()
     elseif cmd == "drop" then
         turtle.select(16)
-        turtle.dropDown()
-        turtle.suckDown()
+        turtle.dropUp()
+        turtle.suckUp()
         turtle.select(1)
     end
     turtle.refuel()
