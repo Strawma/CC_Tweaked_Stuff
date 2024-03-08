@@ -20,9 +20,10 @@ local function setChannel()
     end
     if not validChannel then
         local file = fs.open(fileName, "w")
+        local channel
         repeat
             write("Enter the channel number: ")
-            local channel = read()
+            channel = read()
             print()
         until tonumber(channel)
         file.write(channel)
