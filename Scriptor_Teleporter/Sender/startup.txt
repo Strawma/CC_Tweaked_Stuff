@@ -1,1 +1,1 @@
-wget https://raw.githubusercontent.com/Strawma/CC_Tweaked_Stuff/main/Scriptor_Teleporter/Sender/startup.lua; https://raw.githubusercontent.com/Strawma/CC_Tweaked_Stuff/main/Scriptor_Teleporter/Sender/main
+wget https://raw.githubusercontent.com/Strawma/CC_Tweaked_Stuff/main/startup.lua; https://raw.githubusercontent.com/Strawma/CC_Tweaked_Stuff/main/Scriptor_Teleporter/Sender/main.lua
