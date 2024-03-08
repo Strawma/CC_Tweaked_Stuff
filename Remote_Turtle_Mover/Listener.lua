@@ -4,6 +4,11 @@ while true do
     print("Received command: " .. cmd)
     if cmd == "forward" then
         turtle.forward()
+    elseif cmd == "drop" then
+        turtle.select(16)
+        turtle.drop()
+        turtle.suck()
+        turtle.select(1)
     end
     turtle.refuel()
     print ("Current fuel level: " .. turtle.getFuelLevel())
