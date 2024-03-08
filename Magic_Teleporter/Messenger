@@ -1,0 +1,18 @@
+local TURTLE_ID = 1
+local MODEM = "back"
+
+rednet.open(MODEM)
+
+
+function sendCmd(cmd)
+        rednet.send(TURTLE_ID, cmd)
+end
+
+while true do
+    write("Enter command: ")
+    local cmd = read()
+    if cmd == "exit" then
+        break
+    end
+    sendCmd(cmd)
+end
