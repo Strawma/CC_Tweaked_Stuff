@@ -32,3 +32,10 @@ function tryReadWriteFile(fileName, writePrompt)
     end
     return content
 end
+
+function download(url, file)
+    if fs.exists(file) then
+        fs.delete(file)
+    end
+    shell.run("wget", url, file)
+end
