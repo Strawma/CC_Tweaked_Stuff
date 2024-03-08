@@ -1,5 +1,4 @@
 os.loadAPI("strawma_api.lua")
-
 local PROTOCOL = strawma_api.getProtocol()
 local MODEM = "back"
 
@@ -10,13 +9,14 @@ local function teleportRequest(location)
 end
 
 local function discoverRequest()
+    strawma_api.refresh()
     print("Discovering locations...")
     local timerID = os.startTimer(5)
     local found = {}
     rednet.broadcast("discover", PROTOCOL)
     while true do
         local id, name, protocol = rednet.receive()
-        local event, id = os.pullEvent()
+        local event, id = os.pullEvent("timer")
         if id == timerID then
             break
         end
