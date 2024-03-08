@@ -1,10 +1,15 @@
-rednet.open("right")
+rednet.open("back")
+local TURTLE_ID = 1
+
+function sendCmd(cmd)
+        rednet.send(TURTLE_ID, cmd)
+end
+
 while true do
-    local id, cmd = rednet.receive()
-    print("Received command: " .. cmd)
-    if cmd == "forward" then
-        turtle.forward()
+    write("Enter command: ")
+    local cmd = read()
+    if cmd == "exit" then
+        break
     end
-    turtle.refuel()
-    print ("Current fuel level: " .. turtle.getFuelLevel())
+    sendCmd(cmd)
 end
