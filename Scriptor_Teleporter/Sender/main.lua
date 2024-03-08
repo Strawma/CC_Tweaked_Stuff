@@ -11,31 +11,35 @@ end
 
 local function discoverRequest()
     print("Discovering locations...")
-    local timeout = 3
+    local timerID = os.startTimer(5)
     local found = {}
     rednet.broadcast("discover", PROTOCOL)
-    while os.clock() < timeout do
+    while true do
         local id, name, protocol = rednet.receive(timeout - os.clock())
+        local event, id = os.pullEvent()
+        if id == timerID then
+            break
+        end
         if protocol == PROTOCOL .. "discovery_response" then
             table.insert(found, name)
         end
     end
     strawma_api.refresh()
     if #found == 0 then
-        print("No locations found")
+        return "No locations found"
     else
-        print("Locations found:")
+        msg = "Locations found:"
         for i, name in ipairs(found) do
-            print(i .. ": " .. name)
+            msg = msg .. "\n" .. i .. ": " .. name
         end
     end
-    print()
+    return msg
 end
 
+local displayMsg = discoverRequest()
 while true do
     strawma_api.refresh()
-
-    discoverRequest()
+    print(displayMsg)
 
     write("Enter a location: ")
     local location = read()
