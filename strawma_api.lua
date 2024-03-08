@@ -17,14 +17,18 @@ function tryReadFile(fileName)
     return nil
 end
 
+function writeFile(fileName, content)
+    local file = fs.open(fileName, "w")
+    file.write(content)
+    file.close()
+end
+
 function tryReadWriteFile(fileName, writePrompt)
     local content = tryReadFile(fileName)
     if content == nil then
-        local file = fs.open(fileName, "w")
         write(writePrompt)
         content = read()
-        file.write(content)
-        file.close()
+        writeFile(fileName, content)
     end
     return content
 end

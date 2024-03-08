@@ -25,7 +25,9 @@ local function getMainUrl()
     local url = strawma_api.tryReadFile(fileName)
     if url == nil then
         url = arg[1]
+        strawma_api.writeFile(fileName, url)
     end
+    return url
 end
 
 local mainUrl = getMainUrl()
