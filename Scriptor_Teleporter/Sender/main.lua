@@ -15,13 +15,11 @@ local function discoverRequest()
     local found = {}
     rednet.broadcast("discover", PROTOCOL)
     while true do
-        local id, name, protocol = rednet.receive()
-        if protocol == PROTOCOL .. "discovery_response" then
-            table.insert(found, name)
-        end
-        local event, id = os.pullEvent("timer")
-        if id == timerID then
+        local event, id, name, protocol = os.pullEvent()
+        if event == "timer" and id == timerID then
             break
+        elseif event == "rednet_message" and protocol == PROTOCOL .. "discovery_response" then
+            table.insert(found, name)
         end
     end
     if #found == 0 then
