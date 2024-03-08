@@ -1,3 +1,24 @@
+local function updateSelf()
+    local tempFile = "temp.lua"
+    local url = "https://raw.githubusercontent.com/Strawma/CC_Tweaked_Stuff/main/startup.lua"
+
+    if fs.exists(tempFile) then
+        fs.delete(tempFile)
+    end
+
+    local success = shell.run("wget", url, tempFile)
+
+    if success then
+        fs.delete("startup.lua")
+        fs.move(tempFile, "startup.lua")
+    else
+        fs.delete(tempFile)
+        print("Failed to update startup.lua")
+    end
+end
+
+updateSelf()
+
 local mainFile = "main.lua"
 
 local apiUrl = "https://raw.githubusercontent.com/Strawma/CC_Tweaked_Stuff/main/strawma_api.lua"
