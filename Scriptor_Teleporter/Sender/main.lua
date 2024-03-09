@@ -1,4 +1,5 @@
 os.loadAPI("strawma_api.lua")
+os.loadAPI("interruptible_read.lua")
 local PROTOCOL = strawma_api.getProtocol()
 local MODEM = "back"
 
@@ -36,7 +37,11 @@ local function discoverRequest()
             table.insert(found, name)
         end
     end
-    availableLocations = constructLocations(found)
+    local temp = constructLocations(found)
+    if temp ~= availableLocations then
+        availableLocations = temp
+        interruptible_read.interrupt()
+    end
 end
 
 local function keepDiscovering()
@@ -48,8 +53,10 @@ end
 local function takeInput()
     while true do
         displayText()
-        local location = read()
-        rednet.broadcast("tp", PROTOCOL .. location)
+        local location = interruptible_read.read()
+        if location ~= nil then
+            rednet.broadcast("tp", PROTOCOL .. location)
+        end
     end
 end
 
