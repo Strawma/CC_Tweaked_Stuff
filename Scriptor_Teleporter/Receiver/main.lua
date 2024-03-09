@@ -16,6 +16,7 @@ while true do
             turtle.digDown()
             turtle.suckDown()
             turtle.dropUp()
+            turtle.suckUp()
             turtle.select(1)
         end
     end
