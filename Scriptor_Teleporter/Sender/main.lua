@@ -40,7 +40,7 @@ local function discoverRequest()
     local temp = constructLocations(found)
     if temp ~= availableLocations then
         availableLocations = temp
-        interrptible_read.interrupt()
+        interruptible_read.interrupt()
     end
 end
 
