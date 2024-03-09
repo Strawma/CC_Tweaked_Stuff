@@ -13,6 +13,7 @@ function read()
                 output = output .. key
             end
         end
+        print (output)
     end
     return nil
 end
