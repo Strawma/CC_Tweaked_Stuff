@@ -33,14 +33,26 @@ function tryReadWriteFile(fileName, writePrompt)
     return content
 end
 
-function download(url, file)
-    if fs.exists(file) then
-        fs.delete(file)
+function download(url, filePath)
+    if not fs.exists(filePath) then
+        fs.makeDir(filePath)
     end
-    shell.run("wget", url, file)
+    local response = http.get(url)
+    if not response then
+        error("Failed to download file: " .. url)
+    end
+    local content = response.readAll()
+    response.close()
+    if fs.exists(filePath) then
+        fs.delete(filePath)
+    end
+    local file = fs.open(filePath, "w")
+    file.write(content)
+    file.close()
+    print("Downloaded", url, "to", filePath)
 end
 
-function ImportInterruptibleRead()
+function importInterruptibleRead()
     local url = "https://raw.githubusercontent.com/Strawma/CC_Tweaked_Stuff/main/interruptible_read.lua"
     local fileName = "interruptible_read.lua"
     download(url, fileName)
