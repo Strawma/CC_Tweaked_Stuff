@@ -26,7 +26,7 @@ local function displayText()
 end
 
 local function discoverRequest()
-    local timerID = os.startTimer(5) 
+    local timerID = os.startTimer(3) 
     local found = {}
     rednet.broadcast("discover", PROTOCOL)
     while true do
@@ -47,6 +47,7 @@ end
 local function keepDiscovering()
     while true do
         discoverRequest()
+        sleep(10)
     end
 end
 
