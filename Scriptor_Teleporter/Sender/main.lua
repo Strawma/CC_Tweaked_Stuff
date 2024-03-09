@@ -36,11 +36,7 @@ local function discoverRequest()
             table.insert(found, name)
         end
     end
-    local temp = constructLocations(found)
-    if temp ~= availableLocations then
-        availableLocations = temp
-        displayText()
-    end
+    local availableLocations = constructLocations(found)
 end
 
 local function keepDiscovering()
@@ -51,6 +47,7 @@ end
 
 local function takeInput()
     while true do
+        displayText()
         local location = read()
         rednet.broadcast("tp", PROTOCOL .. location)
     end
