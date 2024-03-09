@@ -6,10 +6,6 @@ local availableLocations = "Searching for locations..."
 
 rednet.open(MODEM)
 
-local function teleportRequest(location)
-    rednet.broadcast("tp", PROTOCOL .. location)
-end
-
 local function constructLocations(found)
     if #found == 0 then
         return "No locations found"
@@ -35,24 +31,30 @@ local function discoverRequest()
                 table.insert(found, name)
             end
         end
-        availableLocations = constructLocations(found)
+        local temp = constructLocations(found)
+        if temp ~= availableLocations then
+            availableLocations = temp
+            displayText()
+        end
+    end
+end
+
+local function displayText()
+    strawma_api.refresh()
+    print(availableLocations .. "\n")
+    write("Enter a location: ")
+end
+
+local function takeInput()
+    while true do
+        local location = read()
+        rednet.broadcast("tp", PROTOCOL .. location)
     end
 end
 
 local function run()
-    while true do
-        strawma_api.refresh()
-        print(availableLocations .. "\n")
-    
-        write("Enter a location: ")
-        local location = read()
-
-        teleportRequest(location)
-    end
+    displayText()
+    parallel.waitForAny(discoverRequest, takeInput)
 end
 
-local function runInParallel()
-    parallel.waitForAny(discoverRequest, run)
-end
-
-runInParallel()
+run()
