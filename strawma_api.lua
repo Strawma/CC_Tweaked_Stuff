@@ -52,13 +52,6 @@ function download(url, filePath)
     print("Downloaded", url, "to", filePath)
 end
 
-function importInterruptibleRead()
-    local url = "https://raw.githubusercontent.com/Strawma/CC_Tweaked_Stuff/main/interruptible_read.lua"
-    local fileName = "interruptible_read.lua"
-    download(url, fileName)
-    os.loadAPI(fileName)
-end
-
 function refresh()
     term.clear()
     term.setCursorPos(1, 1)
