@@ -6,16 +6,18 @@ function read()
         local event, key = os.pullEvent()
         if event == "char" then
             output = output .. key
-            write (output)
+            write (key)
         elseif event == "key" then
             if key == keys.enter then
                 return output
             elseif key == keys.backspace then
                 output = string.sub(output, 1, -2)
-                local x, y = term.getCursorPos()
-                term.setCursorPos(x - 1, y)
-                write(" ")
-                term.setCursorPos(x - 1, y)
+                if output ~= "" then
+                    local x, y = term.getCursorPos()
+                    term.setCursorPos(x - 1, y)
+                    write(" ")
+                    term.setCursorPos(x - 1, y)
+                end
             end
         end
     end
