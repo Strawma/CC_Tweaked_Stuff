@@ -22,6 +22,7 @@ local function discoverRequest()
             table.insert(found, name)
         end
     end
+    local msg
     if #found == 0 then
         return "No locations found"
     else
@@ -30,6 +31,7 @@ local function discoverRequest()
             msg = msg .. "\n" .. i .. ": " .. name
         end
     end
+    msg = msg .. "\n"
     return msg
 end
 
