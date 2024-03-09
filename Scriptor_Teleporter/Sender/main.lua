@@ -2,7 +2,7 @@ os.loadAPI("strawma_api.lua")
 local PROTOCOL = strawma_api.getProtocol()
 local MODEM = "back"
 
-local availableLocations = "Searching for locations..."
+local availableLocations
 
 rednet.open(MODEM)
 
@@ -18,9 +18,15 @@ local function constructLocations(found)
     end
 end
 
+local function displayText()
+    strawma_api.refresh()
+    print(availableLocations .. "\n")
+    write("Enter a location: ")
+end
+
 local function discoverRequest()
     while true do
-        local timerID = os.startTimer(10) 
+        local timerID = os.startTimer(5) 
         local found = {}
         rednet.broadcast("discover", PROTOCOL)
         while true do
@@ -39,12 +45,6 @@ local function discoverRequest()
     end
 end
 
-local function displayText()
-    strawma_api.refresh()
-    print(availableLocations .. "\n")
-    write("Enter a location: ")
-end
-
 local function takeInput()
     while true do
         local location = read()
@@ -53,7 +53,8 @@ local function takeInput()
 end
 
 local function run()
-    displayText()
+    print "Searching for locations..."
+    discoverRequest()
     parallel.waitForAny(discoverRequest, takeInput)
 end
 
