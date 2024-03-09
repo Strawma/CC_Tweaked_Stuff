@@ -9,9 +9,10 @@ function read()
             write (key)
         elseif event == "key" then
             if key == keys.enter then
+                print(output)
                 return output
             elseif key == keys.backspace then
-                output = string.sub(output, 1, -2)
+                output = output:sub(1, -2)
                 if output ~= "" then
                     local x, y = term.getCursorPos()
                     term.setCursorPos(x - 1, y)
