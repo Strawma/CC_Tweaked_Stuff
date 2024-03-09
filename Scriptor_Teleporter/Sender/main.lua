@@ -36,7 +36,7 @@ local function discoverRequest()
             table.insert(found, name)
         end
     end
-    local availableLocations = constructLocations(found)
+    availableLocations = constructLocations(found)
 end
 
 local function keepDiscovering()
