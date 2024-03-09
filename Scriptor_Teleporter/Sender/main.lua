@@ -1,5 +1,5 @@
 os.loadAPI("strawma_api.lua")
-os.loadAPI("interruptible_read.lua")
+strawma_api.ImportInterruptibleRead()
 local PROTOCOL = strawma_api.getProtocol()
 local MODEM = "back"
 

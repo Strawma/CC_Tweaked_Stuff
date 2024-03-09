@@ -40,6 +40,13 @@ function download(url, file)
     shell.run("wget", url, file)
 end
 
+function ImportInterruptibleRead()
+    local interruptibleReadUrl = "https://raw.githubusercontent.com/Strawma/CC_Tweaked_Stuff/main/interruptible_read.lua"
+    local interruptibleReadFile = "interruptible_read.lua"
+    download(interruptibleReadUrl, interruptibleReadFile)
+    os.loadAPI(interruptibleReadFile)
+end
+
 function refresh()
     term.clear()
     term.setCursorPos(1, 1)
