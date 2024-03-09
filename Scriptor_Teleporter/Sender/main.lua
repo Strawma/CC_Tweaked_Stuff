@@ -25,23 +25,27 @@ local function displayText()
 end
 
 local function discoverRequest()
+    local timerID = os.startTimer(5) 
+    local found = {}
+    rednet.broadcast("discover", PROTOCOL)
     while true do
-        local timerID = os.startTimer(5) 
-        local found = {}
-        rednet.broadcast("discover", PROTOCOL)
-        while true do
-            local event, id, name, protocol = os.pullEvent()
-            if event == "timer" and id == timerID then
-                break
-            elseif event == "rednet_message" and protocol == PROTOCOL .. "discovery_response" then
-                table.insert(found, name)
-            end
+        local event, id, name, protocol = os.pullEvent()
+        if event == "timer" and id == timerID then
+            break
+        elseif event == "rednet_message" and protocol == PROTOCOL .. "discovery_response" then
+            table.insert(found, name)
         end
-        local temp = constructLocations(found)
-        if temp ~= availableLocations then
-            availableLocations = temp
-            displayText()
-        end
+    end
+    local temp = constructLocations(found)
+    if temp ~= availableLocations then
+        availableLocations = temp
+        displayText()
+    end
+end
+
+local function keepDiscovering()
+    while true do
+        discoverRequest()
     end
 end
 
@@ -53,9 +57,10 @@ local function takeInput()
 end
 
 local function run()
+    strawma_api.refresh()
     print "Searching for locations..."
     discoverRequest()
-    parallel.waitForAny(discoverRequest, takeInput)
+    parallel.waitForAny(keepDiscovering, takeInput)
 end
 
 run()
