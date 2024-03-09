@@ -3,17 +3,18 @@ function read()
     interrupted = false
     local output = ""
     while not interrupted do
-        local event, key = os.pullEvent("key")
+        local event, key = os.pullEvent()
         if event == "char" then
-            if key == "\n" then
+            output = output .. key
+            print (output)
+        elseif event == "key" then
+            if key == keys.enter then
                 return output
-            elseif key == "\b" then
+            elseif key == keys.backspace then
                 output = string.sub(output, 1, -2)
-            else
-                output = output .. key
+                print (output)
             end
         end
-        print (output)
     end
     return nil
 end
