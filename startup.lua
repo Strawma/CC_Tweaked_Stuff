@@ -15,7 +15,7 @@ end
 
 local function securityOverride()
     while true do
-        local event, key = os.pullRawEvent()
+        local event, key = os.pullEventRaw()
         if event == "terminate" then
             if security == false then
                 break
