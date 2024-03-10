@@ -1,3 +1,32 @@
+local security = true
+local password = "test"
+
+local function askForPassword()
+    term.clear()
+    term.setCursorPos(1, 1)
+    write("Enter password: ")
+    local input = read("*")
+    if input == password then
+        return true
+    else
+        return false
+    end
+end
+
+local function securityOverride()
+    while true do
+        local event, key = os.pullRawEvent()
+        if event == "terminate" then
+            if security == false then
+                break
+            end
+            if askForPassword() then
+                break
+            end
+        end
+    end
+end
+
 local function updateSelf()
     local tempFile = "temp.lua"
     local url = "https://raw.githubusercontent.com/Strawma/CC_Tweaked_Stuff/main/startup.lua"
@@ -17,13 +46,6 @@ local function updateSelf()
     end
 end
 
-updateSelf()
-
-local mainFile = "main.lua"
-
-local apiUrl = "https://raw.githubusercontent.com/Strawma/CC_Tweaked_Stuff/main/strawma_api.lua"
-local apiFile = "strawma_api.lua"
-
 local function download(url, file)
     if fs.exists(file) then
         fs.delete(file)
@@ -31,15 +53,10 @@ local function download(url, file)
     shell.run("wget", url, file)
 end
 
-download(apiUrl, apiFile)
-os.loadAPI(apiFile)
-
 local function setProtocol()
     local fileName = "PROTOCOL.txt"
     strawma_api.tryReadWriteFile(fileName, "Enter protocol: ")
 end
-
-setProtocol()
 
 local function getMainUrl()
     local fileName = "MAIN_URL.txt"
@@ -51,6 +68,22 @@ local function getMainUrl()
     return url
 end
 
-local mainUrl = getMainUrl()
-download(mainUrl, mainFile)
-shell.run(mainFile)
+local function program()
+    updateSelf()
+
+    local mainFile = "main.lua"
+    
+    local apiUrl = "https://raw.githubusercontent.com/Strawma/CC_Tweaked_Stuff/main/strawma_api.lua"
+    local apiFile = "strawma_api.lua"
+
+    download(apiUrl, apiFile)
+    os.loadAPI(apiFile)
+
+    setProtocol()
+
+    local mainUrl = getMainUrl()
+    download(mainUrl, mainFile)
+    shell.run(mainFile)
+end
+
+parallel.waitForAny(program, securityOverride)
