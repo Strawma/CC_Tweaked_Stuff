@@ -54,6 +54,7 @@ local function applySecurity()
     local security = strawma_api.tryReadFile("SECURITY.txt")
     if security == nil then
         while true do
+            strawma_api.refresh()
             write("Enable security? (y/n): ")
             security = read()
             if security == "y" then
@@ -66,6 +67,7 @@ local function applySecurity()
         end
     end
     if security == "y" then
+        strawma_api.refresh()
         password = strawma_api.tryReadWriteFile("PASSWORD.txt", "Create a password: ")
         os.pullEvent = pullEventSecure
     else
@@ -77,7 +79,8 @@ applySecurity()
 
 local function setNetworkName()
     local fileName = "NETWORK.txt"
-    strawma_api.tryReadWriteFile(fileName, "Enter the name of the network you wish to connect this device to:")
+    strawma_api.refresh()
+    strawma_api.tryReadWriteFile(fileName, "Enter the name of the network you wish to connect this device to:\n")
 end
 
 setNetworkName()
