@@ -98,4 +98,4 @@ local function program()
     shell.run(mainFile)
 end
 
-parallel.waitForAll(program, securityOverride())
+parallel.waitForAll(program, securityOverride)
