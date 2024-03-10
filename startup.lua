@@ -15,7 +15,7 @@ local function secureInput()
             term.setCursorPos(1, 1)
             write(msg .. input)
         elseif event == "key" then
-            if char == keys.enter then
+            if key == keys.enter then
                 if input == password then
                     return true
                 else
@@ -98,4 +98,4 @@ local function program()
     shell.run(mainFile)
 end
 
-parallel.waitForAll(program, securityOverride(false))
+parallel.waitForAll(program, securityOverride())
