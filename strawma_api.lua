@@ -1,11 +1,3 @@
-function getProtocol()
-    local fileName = "PROTOCOL.txt"
-    local file = fs.open(fileName, "r")
-    local protocol = file.readLine()
-    file.close()
-    return protocol
-end
-
 function tryReadFile(fileName)
     local content
     if fs.exists(fileName) then
@@ -15,6 +7,10 @@ function tryReadFile(fileName)
         return content
     end
     return nil
+end
+
+function getNetwork()
+    return tryReadFile("NETWORK.txt")
 end
 
 function writeFile(fileName, content)

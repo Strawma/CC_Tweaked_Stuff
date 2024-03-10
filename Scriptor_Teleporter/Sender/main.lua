@@ -1,5 +1,5 @@
 os.loadAPI("strawma_api.lua")
-local PROTOCOL = strawma_api.getProtocol()
+local NETWORK = strawma_api.getNETWORK()
 local MODEM = "back"
 
 local availableLocations
@@ -27,12 +27,12 @@ end
 local function discoverRequest()
     local timerID = os.startTimer(3) 
     local found = {}
-    rednet.broadcast("discover", PROTOCOL)
+    rednet.broadcast("discover", NETWORK)
     while true do
-        local event, id, name, protocol = os.pullEvent()
+        local event, id, name, network = os.pullEvent()
         if event == "timer" and id == timerID then
             break
-        elseif event == "rednet_message" and protocol == PROTOCOL .. "discovery_response" then
+        elseif event == "rednet_message" and network == NETWORK .. "discovery_response" then
             table.insert(found, name)
         end
     end

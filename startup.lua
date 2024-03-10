@@ -36,7 +36,8 @@ local password
 local function pullEventSecure()
     local event = {os.pullEventRaw()}
     if event[1] == "terminate" then
-        print("Enter your password to terminate: ")
+        strawma_api.refresh()
+        write("Enter your password to terminate: ")
         local input = read("*")
         if input ~= password then
             print("Incorrect password. Shutting down in 3 seconds...")
@@ -53,7 +54,7 @@ local function applySecurity()
     local security = strawma_api.tryReadFile("SECURITY.txt")
     if security == nil then
         while true do
-            print("Enable security? (y/n): ")
+            write("Enable security? (y/n): ")
             security = read()
             if security == "y" then
                 strawma_api.writeFile("SECURITY.txt", "y")
@@ -74,12 +75,12 @@ end
 applySecurity()
 
 
-local function setProtocol()
-    local fileName = "PROTOCOL.txt"
-    strawma_api.tryReadWriteFile(fileName, "Enter protocol: ")
+local function setNetworkName()
+    local fileName = "NETWORK.txt"
+    strawma_api.tryReadWriteFile(fileName, "Enter the name of the network you wish to connect this device to:")
 end
 
-setProtocol()
+setNetworkName()
 
 local function getMainUrl()
     local fileName = "MAIN_URL.txt"
