@@ -23,6 +23,8 @@ local function securityOverride()
             if askForPassword() then
                 break
             end
+            print ("Incorrect password... shutting down")
+            shutdown()
         end
     end
 end
@@ -86,4 +88,4 @@ local function program()
     shell.run(mainFile)
 end
 
-parallel.waitForAny(program, securityOverride)
+parallel.waitForAll(program, securityOverride)
