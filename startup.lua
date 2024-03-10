@@ -20,7 +20,7 @@ local function secureInput()
                     return true
                 else
                     print("Incorrect password")
-                    shutdown()
+                    os.shutdown()
                 end
             end
         end
