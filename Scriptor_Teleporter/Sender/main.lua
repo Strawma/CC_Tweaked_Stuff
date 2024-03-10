@@ -55,7 +55,7 @@ local function takeInput()
         displayText()
         local location = read()
         if location ~= nil then
-            rednet.broadcast("tp", PROTOCOL .. location)
+            rednet.broadcast("tp", NETWORK .. location)
         end
     end
 end
