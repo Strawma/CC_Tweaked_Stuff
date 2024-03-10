@@ -43,6 +43,8 @@ local function pullEventSecure()
             sleep(3)
             os.shutdown()
         end
+        os.pullEvent = tempPullEvent
+        os.queueEvent("terminate")
     end
     return table.unpack(event)
 end
