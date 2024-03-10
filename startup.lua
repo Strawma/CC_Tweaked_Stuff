@@ -35,6 +35,7 @@ local function securityOverride()
                 break
             end
             secureInput()
+            break
         end
     end
 end
