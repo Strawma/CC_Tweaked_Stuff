@@ -34,7 +34,7 @@ os.loadAPI(apiFile)
 
 local password
 local function pullEventSecure()
-    local event = {os.pullEvent()}
+    local event = {os.pullEventRaw()}
     if event[1] == "terminate" then
         print("Enter your password to terminate: ")
         local input = read("*")
