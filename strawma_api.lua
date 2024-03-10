@@ -20,7 +20,7 @@ function readInput()
                 input = input:sub(1, -2)
                 local x, y = term.getCursorPos()
                 term.setCursorPos(x - 1, y)
-                write("\8")
+                write(" ")
             end
         end
     end
