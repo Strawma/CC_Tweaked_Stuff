@@ -35,6 +35,8 @@ local function securityOverride()
                 break
             end
             secureInput()
+            term.clear()
+            term.setCursorPos(1, 1)
             break
         end
     end
