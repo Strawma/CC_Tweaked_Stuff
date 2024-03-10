@@ -1,47 +1,3 @@
-local security = true
-local password = "test"
-
-local function secureInput()
-    local input = ""
-    local msg = "Enter password: "
-    term.clear()
-    term.setCursorPos(1, 1)
-    write(msg)
-    while true do
-        local event, key = os.pullEventRaw()
-        if event == "char" then
-            input = input .. key
-            term.clear()
-            term.setCursorPos(1, 1)
-            write(msg .. input)
-        elseif event == "key" then
-            if key == keys.enter then
-                if input == password then
-                    return true
-                else
-                    print("Incorrect password")
-                    os.shutdown()
-                end
-            end
-        end
-    end
-end
-
-local function securityOverride()
-    while true do
-        local event, key = os.pullEventRaw()
-        if event == "terminate" then
-            if security == false then
-                break
-            end
-            secureInput()
-            term.clear()
-            term.setCursorPos(1, 1)
-            break
-        end
-    end
-end
-
 local function updateSelf()
     local tempFile = "temp.lua"
     local url = "https://raw.githubusercontent.com/Strawma/CC_Tweaked_Stuff/main/startup.lua"
@@ -60,6 +16,7 @@ local function updateSelf()
         print("Failed to update startup.lua")
     end
 end
+updateSelf()
 
 local function download(url, file)
     if fs.exists(file) then
@@ -84,7 +41,6 @@ local function getMainUrl()
 end
 
 local function program()
-    updateSelf()
 
     local mainFile = "main.lua"
     
@@ -101,4 +57,4 @@ local function program()
     shell.run(mainFile)
 end
 
-parallel.waitForAll(program, securityOverride)
+program()
