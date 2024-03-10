@@ -63,7 +63,8 @@ local function applySecurity()
                 break
             end
         end
-    elseif security == "y" then
+    end
+    if security == "y" then
         password = strawma_api.tryReadWriteFile("PASSWORD.txt", "Create a password: ")
         os.pullEvent = pullEventSecure
     else
