@@ -12,8 +12,6 @@ function readInput()
         local event, key = os.pullEvent()
         if event == "char" then
             input = input .. key
-            term.clear()
-            term.setCursorPos(1, 1)
             write(key)
         elseif event == "key" then
             if key == keys.enter then
