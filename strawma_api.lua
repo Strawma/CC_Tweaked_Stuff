@@ -14,7 +14,7 @@ function readInput()
             input = input .. key
             term.clear()
             term.setCursorPos(1, 1)
-            write(msg .. input)
+            write(key)
         elseif event == "key" then
             if key == keys.enter then
                 return input
