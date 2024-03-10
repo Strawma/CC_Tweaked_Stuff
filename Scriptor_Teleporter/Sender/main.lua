@@ -53,7 +53,7 @@ end
 local function takeInput()
     while true do
         displayText()
-        local location = read()
+        local location = strawma_api.readInput()
         if location ~= nil then
             rednet.broadcast("tp", PROTOCOL .. location)
         end

@@ -6,6 +6,28 @@ function getProtocol()
     return protocol
 end
 
+function readInput()
+    local input = ""
+    while true do
+        local event, key = os.pullEvent()
+        if event == "char" then
+            input = input .. key
+            term.clear()
+            term.setCursorPos(1, 1)
+            write(msg .. input)
+        elseif event == "key" then
+            if key == keys.enter then
+                return input
+            elseif key == keys.backspace and input:len() > 0 then
+                input = input:sub(1, -2)
+                local x, y = term.getCursorPos()
+                term.setCursorPos(x - 1, y)
+                write("\8")
+            end
+        end
+    end
+end
+
 function tryReadFile(fileName)
     local content
     if fs.exists(fileName) then
@@ -27,7 +49,7 @@ function tryReadWriteFile(fileName, writePrompt)
     local content = tryReadFile(fileName)
     if content == nil then
         write(writePrompt)
-        content = read()
+        content = readInput()
         writeFile(fileName, content)
     end
     return content
