@@ -1,15 +1,29 @@
 local security = true
 local password = "test"
 
-local function askForPassword()
+local function secureInput()
+    local input = ""
+    local msg = "Enter password: "
     term.clear()
     term.setCursorPos(1, 1)
-    write("Enter password: ")
-    local input = read("*")
-    if input == password then
-        return true
-    else
-        return false
+    write(msg)
+    while true do
+        local event, key = os.pullEventRaw()
+        if event == "char" then
+            input = input .. key
+            term.clear()
+            term.setCursorPos(1, 1)
+            write(msg .. input)
+        elseif event == "key" then
+            if char == keys.enter then
+                if input == password then
+                    return true
+                else
+                    print("Incorrect password")
+                    shutdown()
+                end
+            end
+        end
     end
 end
 
@@ -20,11 +34,7 @@ local function securityOverride()
             if security == false then
                 break
             end
-            if askForPassword() then
-                break
-            end
-            print ("Incorrect password... shutting down")
-            shutdown()
+            secureInput()
         end
     end
 end
@@ -88,4 +98,4 @@ local function program()
     shell.run(mainFile)
 end
 
-parallel.waitForAll(program, securityOverride)
+parallel.waitForAll(program, securityOverride(false))
