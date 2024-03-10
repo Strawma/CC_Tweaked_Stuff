@@ -33,6 +33,13 @@ function tryReadWriteFile(fileName, writePrompt)
     return content
 end
 
+function tryReadCreateFile(fileName, defaultContent) 
+    local content = tryReadFile(fileName)
+    if content == nil then
+        writeFile(fileName, defaultContent)
+    end
+end
+
 function download(url, filePath)
     if not fs.exists(filePath) then
         fs.makeDir(filePath)
