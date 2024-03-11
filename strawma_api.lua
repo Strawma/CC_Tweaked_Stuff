@@ -60,14 +60,6 @@ function refresh()
     term.setCursorPos(1, 1)
 end
 
-function checkForItem(name, slot)
-    local item = turtle.getItemDetail(slot)
-    if item and item.name == name then
-        return true
-    end
-    return false
-end
-
 function switchToItem(name)
     for slot = 1, 16 do
         local item = turtle.getItemDetail(slot)

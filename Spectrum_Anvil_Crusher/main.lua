@@ -51,12 +51,8 @@ local function refuel()
 end
 
 local function hasAnvil()
-    local hasAnvil = false
-    local ANVIL = {"minecraft:anvil", "minecraft:chipped_anvil", "minecraft:damaged_anvil"}
-    for i, anvil in ipairs(ANVIL) do
-        hasAnvil = hasAnvil or strawma_api.checkForItem(anvil, ANVIL_SLOT)
-    end
-    return hasAnvil
+    local item = turtle.getItemDetail(ANVIL_SLOT)
+    return item and string.find(item.name, "anvil") 
 end
 
 local function checkForAnvil()
