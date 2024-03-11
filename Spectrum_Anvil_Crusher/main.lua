@@ -3,7 +3,6 @@ local FUEL_SLOT = 1
 local ANVIL_SLOT = 2
 local INPUT_SLOT = 3
 local OUTPUT_SLOT = 4
-local ANVIL = {"minecraft:anvil", "minecraft.chipped_anvil", "minecraft.damaged_anvil"}
 
 local y = 0
 local direction = "forward"
@@ -131,8 +130,8 @@ local function crushItem()
     sleep(1)
     turtle.suckDown()
     pushToLeftChest()
-    turtle.digDown()
     turtle.select(ANVIL_SLOT)
+    turtle.digDown()
     sleep(1)
     turtle.suckDown()
 end
