@@ -94,7 +94,7 @@ local function crushItem()
     turtle.up()
     y = y + 1
     turtle.select(INPUT_SLOT)
-    turtle.drop()
+    turtle.dropDown(1)
     turtle.up()
     y = y + 1
     turtle.select(ANVIL_SLOT)
