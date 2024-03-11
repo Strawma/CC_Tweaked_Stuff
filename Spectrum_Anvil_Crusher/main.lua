@@ -33,7 +33,7 @@ end
 --os.pullEvent = terminate
 
 local function needsFuel()
-    return turtle.getFuelLevel() > 10
+    return turtle.getFuelLevel() < 11
 end
 
 local function refuel()
