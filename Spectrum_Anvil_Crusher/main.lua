@@ -20,17 +20,17 @@ local function returnToStart()
     end
 end
 
-local tempPullEvent = os.pullEvent
+--local tempPullEvent = os.pullEvent
 
-local function terminate()
-    local event = {os.pullEventRaw()}
-    if event[1] == "terminate" then
-        returnToStart()
-    end
-    tempPullEvent(table.unpack(event))
-end
+--local function terminate()
+--    local event = {os.pullEventRaw()}
+--    if event[1] == "terminate" then
+--        returnToStart()
+--    end
+--    tempPullEvent(table.unpack(event))
+--end
 
-os.pullEvent = terminate
+--os.pullEvent = terminate
 
 local function needsFuel()
     return turtle.getFuelLevel() > 10
