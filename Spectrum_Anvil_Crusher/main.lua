@@ -128,10 +128,12 @@ local function crushItem()
     turtle.down()
     y = y - 2
     turtle.select(OUTPUT_SLOT)
+    sleep(1)
     turtle.suckDown()
     pushToLeftChest()
     turtle.digDown()
     turtle.select(ANVIL_SLOT)
+    sleep(1)
     turtle.suckDown()
 end
 
