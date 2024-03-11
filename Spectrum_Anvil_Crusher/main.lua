@@ -75,7 +75,7 @@ local function takeFromRightChest()
     turtle.turnRight()
     direction = "right"
     turtle.select(INPUT_SLOT)
-    turtle.suck()
+    turtle.suck(1)
     print("Searching for item")
     if not hasInputItem() then
         print("No item found in input chest")
@@ -88,28 +88,6 @@ local function takeFromRightChest()
     turtle.turnLeft()
     direction = "forward"
     return itemSlot
-end
-
-local function crushItem()
-    turtle.up()
-    y = y + 1
-    turtle.select(INPUT_SLOT)
-    turtle.dropDown(1)
-    turtle.up()
-    turtle.up()
-    y = y + 2
-    turtle.select(ANVIL_SLOT)
-    turtle.placeDown()
-    turtle.down()
-    turtle.down()
-    y = y - 2
-    turtle.select(OUTPUT_SLOT)
-    turtle.suckDown()
-    turtle.digDown()
-    turtle.select(ANVIL_SLOT)
-    turtle.suckDown()
-    turtle.down()
-    y = y - 1
 end
 
 local function hasOutputItem()
@@ -133,6 +111,25 @@ local function pushToLeftChest()
     direction = "forward"
 end
 
+local function crushItem()
+    turtle.select(INPUT_SLOT)
+    turtle.dropDown(1)
+    turtle.up()
+    turtle.up()
+    y = y + 2
+    turtle.select(ANVIL_SLOT)
+    turtle.placeDown()
+    turtle.down()
+    turtle.down()
+    y = y - 2
+    turtle.select(OUTPUT_SLOT)
+    turtle.suckDown()
+    pushToLeftChest()
+    turtle.digDown()
+    turtle.select(ANVIL_SLOT)
+    turtle.suckDown()
+end
+
 local function run()
     while true do
         strawma_api.refresh()
@@ -140,7 +137,6 @@ local function run()
         checkForAnvil()
         takeFromRightChest()
         crushItem()
-        pushToLeftChest()
     end
 end
 
