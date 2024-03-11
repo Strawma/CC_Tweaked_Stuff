@@ -32,14 +32,15 @@ local function checkForAnvil()
 
 end
 
-local function takeFromLeftChest()
-    local chest = peripheral.wrap("left")
+local function takeFromRightChest()
+    local chest = peripheral.wrap("right")
     local items = chest.list()
     local tookItem = false
     local itemSlot = strawma_api.switchToEmptySlot()
+    print("Searching for item")
     while not tookItem do
         for slot, item in pairs(items) do
-            tookItem = chest.pushItems(peripheral.getName(turtle), slot, 1)
+            tookItem = chest.pushItems("left", slot, 1)
         end
     end
     print("Item taken")
@@ -59,13 +60,13 @@ local function crushItem()
     turtle.down()
 end
 
-local function pushToRightChest()
-    local chest = peripheral.wrap("right")
+local function pushToLeftChest()
+    local chest = peripheral.wrap("left")
     local items = chest.list()
     local pushedItem = false
     while not pushedItem do
         for slot, item in pairs(items) do
-            pushedItem = chest.pullItems(peripheral.getName(turtle), slot, 1)
+            pushedItem = chest.pullItems("right", slot, 1)
         end
     end
     print("Item pushed")
@@ -75,9 +76,9 @@ local function run()
     while true do
         refuel()
         checkForAnvil()
-        takeFromLeftChest()
+        takeFromRightChest()
         crushItem()
-        pushToRightChest()
+        pushToLeftChest()
     end
 end
 
