@@ -3,7 +3,7 @@ local FUEL_SLOT = 1
 local ANVIL_SLOT = 2
 local INPUT_SLOT = 3
 local OUTPUT_SLOT = 4
-local ANVIL = "minecraft:anvil"
+local ANVIL = {"minecraft:anvil", "minecraft.chipped_anvil", "minecraft.damaged_anvil"}
 
 local y = 0
 local direction = "forward"
@@ -52,7 +52,11 @@ local function refuel()
 end
 
 local function hasAnvil()
-    return strawma_api.checkForItem(ANVIL, ANVIL_SLOT)
+    local hasAnvil = false
+    for anvil in ANVIL do
+        hasAnvil = hasAnvil or strawma_api.checkForItem(anvil, ANVIL_SLOT)
+    end
+    return hasAnvil
 end
 
 local function checkForAnvil()
