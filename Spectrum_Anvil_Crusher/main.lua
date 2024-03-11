@@ -5,6 +5,32 @@ local INPUT_SLOT = 3
 local OUTPUT_SLOT = 4
 local ANVIL = "minecraft:anvil"
 
+local y = 0
+local direction = "forward"
+
+local function returnToStart()
+    if direction == "left" then 
+        turtle.turnRight()
+    elseif direction == "right" then
+        turtle.turnLeft()
+    end
+    while y > 0 do
+        turtle.down()
+        y = y - 1
+    end
+end
+
+local function terminate()
+    local event = {os.pullEventRaw()}
+    if event[1] == "terminate" then
+        returnToStart()
+    end
+    tempPullEvent(table.unpack(event))
+end
+
+tempPullEvent = os.pullEvent
+os.pullEvent = terminate
+
 local function needsFuel()
     return turtle.getFuelLevel() > 10
 end
@@ -46,6 +72,7 @@ end
 
 local function takeFromRightChest()
     turtle.turnRight()
+    direction = "right"
     turtle.select(INPUT_SLOT)
     turtle.suck()
     print("Searching for item")
@@ -58,23 +85,28 @@ local function takeFromRightChest()
     end
     print("Item taken")
     turtle.turnLeft()
+    direction = "forward"
     return itemSlot
 end
 
 local function crushItem()
     turtle.up()
+    y = y + 1
     turtle.select(INPUT_SLOT)
     turtle.drop()
     turtle.up()
+    y = y + 1
     turtle.select(ANVIL_SLOT)
     turtle.placeDown()
     turtle.down()
+    y = y - 1
     turtle.select(OUTPUT_SLOT)
     turtle.suckDown()
     turtle.digDown()
     turtle.select(ANVIL_SLOT)
     turtle.suckDown()
     turtle.down()
+    y = y - 1
 end
 
 local function hasOutputItem()
@@ -83,6 +115,7 @@ end
 
 local function pushToLeftChest()
     turtle.turnLeft()
+    direction = "left"
     turtle.select(OUTPUT_SLOT)
     turtle.drop()
     if hasOutputItem() then
@@ -94,6 +127,7 @@ local function pushToLeftChest()
     end
     print("Item pushed to chest")
     turtle.turnRight()
+    direction = "forward"
 end
 
 local function run()
