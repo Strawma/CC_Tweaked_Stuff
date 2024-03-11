@@ -53,7 +53,8 @@ end
 
 local function hasAnvil()
     local hasAnvil = false
-    for anvil in ANVIL do
+    local ANVIL = {"minecraft:anvil", "minecraft:chipped_anvil", "minecraft:damaged_anvil"}
+    for i, anvil in ipairs(ANVIL) do
         hasAnvil = hasAnvil or strawma_api.checkForItem(anvil, ANVIL_SLOT)
     end
     return hasAnvil
