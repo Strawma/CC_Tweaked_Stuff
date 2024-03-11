@@ -96,11 +96,13 @@ local function crushItem()
     turtle.select(INPUT_SLOT)
     turtle.dropDown(1)
     turtle.up()
-    y = y + 1
+    turtle.up()
+    y = y + 2
     turtle.select(ANVIL_SLOT)
     turtle.placeDown()
     turtle.down()
-    y = y - 1
+    turtle.down()
+    y = y - 2
     turtle.select(OUTPUT_SLOT)
     turtle.suckDown()
     turtle.digDown()
