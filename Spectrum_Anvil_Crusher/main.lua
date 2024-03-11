@@ -20,6 +20,8 @@ local function returnToStart()
     end
 end
 
+local tempPullEvent = os.pullEvent
+
 local function terminate()
     local event = {os.pullEventRaw()}
     if event[1] == "terminate" then
@@ -28,7 +30,6 @@ local function terminate()
     tempPullEvent(table.unpack(event))
 end
 
-tempPullEvent = os.pullEvent
 os.pullEvent = terminate
 
 local function needsFuel()
