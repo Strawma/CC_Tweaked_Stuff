@@ -1,22 +1,20 @@
 os.loadAPI("strawma_api.lua")
 
 local function refuel()
-    while true do
-        if turtle.getFuelLevel() < 10 then
-            strawma_api.refresh()
-            print("Refueling...")
-            local hasFuel = strawma_api.switchToItem("minecraft:coal")
-            if not hasFuel then
-                print("No fuel found")
-                while not hasFuel do
-                    strawma_api.refresh()
-                    hasFuel = strawma_api.switchToItem("minecraft:coal")
-                    sleep(5)
-                end
-                print("Fuel found")
+    if turtle.getFuelLevel() < 10 then
+        strawma_api.refresh()
+        print("Refueling...")
+        local hasFuel = strawma_api.switchToItem("minecraft:coal")
+        if not hasFuel then
+            print("No fuel found")
+            while not hasFuel do
+                strawma_api.refresh()
+                hasFuel = strawma_api.switchToItem("minecraft:coal")
+                sleep(5)
             end
-            turtle.refuel()
+            print("Fuel found")
         end
+        turtle.refuel()
     end
 end
 
