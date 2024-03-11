@@ -64,6 +64,17 @@ function switchToItem(name)
     for slot = 1, 16 do
         local item = turtle.getItemDetail(slot)
         if item and item.name == name then
+            turtle.select(slot)
+            return slot
+        end
+    end
+    return nil
+end
+
+function switchToEmptySlot()
+    for slot = 1, 16 do
+        if turtle.getItemCount(slot) == 0 then
+            turtle.select(slot)
             return slot
         end
     end
