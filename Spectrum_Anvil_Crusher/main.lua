@@ -3,6 +3,7 @@ local FUEL_SLOT = 1
 local ANVIL_SLOT = 2
 local INPUT_SLOT = 3
 local OUTPUT_SLOT = 4
+local ITEMS_AT_ONCE = 4
 
 local y = 0
 local direction = "forward"
@@ -75,13 +76,13 @@ local function takeFromRightChest()
     turtle.turnRight()
     direction = "right"
     turtle.select(INPUT_SLOT)
-    turtle.suck(1)
+    turtle.suck(ITEMS_AT_ONCE)
     print("Searching for item")
     if not hasInputItem() then
         print("No item found in input chest")
         while not hasInputItem() do
             sleep(10)
-            turtle.suck(4)
+            turtle.suck(ITEMS_AT_ONCE)
         end
     end
     print("Item taken")
@@ -113,7 +114,7 @@ end
 
 local function crushItem()
     turtle.select(INPUT_SLOT)
-    turtle.dropDown(4)
+    turtle.dropDown(ITEMS_AT_ONCE)
     turtle.up()
     turtle.up()
     y = y + 2
