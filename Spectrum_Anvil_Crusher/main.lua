@@ -3,7 +3,7 @@ local FUEL_SLOT = 1
 local ANVIL_SLOT = 2
 local INPUT_SLOT = 3
 local OUTPUT_SLOT = 4
-local ITEMS_AT_ONCE = 4
+local ITEMS_AT_ONCE = 1
 
 local y = 0
 local direction = "forward"
