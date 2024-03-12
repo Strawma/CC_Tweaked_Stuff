@@ -81,7 +81,7 @@ local function takeFromRightChest()
         print("No item found in input chest")
         while not hasInputItem() do
             sleep(10)
-            turtle.suck()
+            turtle.suck(4)
         end
     end
     print("Item taken")
@@ -113,7 +113,7 @@ end
 
 local function crushItem()
     turtle.select(INPUT_SLOT)
-    turtle.dropDown(1)
+    turtle.dropDown(4)
     turtle.up()
     turtle.up()
     y = y + 2
