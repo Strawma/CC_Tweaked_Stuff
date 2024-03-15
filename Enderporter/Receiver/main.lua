@@ -6,6 +6,7 @@ local LOCATION = NETWORK .. NAME
 
 local modem = peripheral.find("modem")
 modem.open(CHANNEL)
+rs.setOutput("back", true)
 while true do
     local event, side, channel, replyChannel, message, distance
     repeat
@@ -17,10 +18,10 @@ while true do
         modem.transmit(CHANNEL, CHANNEL, {"discovery_response", NAME})
     elseif cmd == "tp" and location == NAME then
         print("Received command: " .. cmd)
-        rs.setOutput("back", true)
+        rs.setOutput("back", false)
         rs.setOutput("bottom", true)
         sleep(1)
-        rs.setOutput("back", false)
+        rs.setOutput("back", true)
         rs.setOutput("bottom", false)
     end
 end
