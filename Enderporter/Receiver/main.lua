@@ -15,7 +15,7 @@ while true do
     if cmd == "discover" then
         print("Received discover request")
         modem.transmit(CHANNEL, CHANNEL, {"discovery_response", NAME})
-    elseif cmd == "tp" and location == "Name" then
+    elseif cmd == "tp" and location == NAME then
         print("Received command: " .. cmd)
         rs.setOutput("back", true)
         rs.setOutput("down", true)
