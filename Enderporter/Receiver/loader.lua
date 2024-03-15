@@ -1,2 +1,2 @@
 shell.run("wget", "https://raw.githubusercontent.com/Strawma/CC_Tweaked_Stuff/main/startup.lua", "startup.lua")
-shell.run("startup", "https://raw.githubusercontent.com/Strawma/CC_Tweaked_Stuff/main/Scriptor_Teleporter/Receiver/main.lua")
+shell.run("startup", "https://raw.githubusercontent.com/Strawma/CC_Tweaked_Stuff/main/Enderporter/Receiver/main.lua")
