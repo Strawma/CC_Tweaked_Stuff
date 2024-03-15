@@ -14,7 +14,7 @@ Allows you to remotely trigger an enderporter, must be primed manually using pea
 
 ## Required Items
 ### Teleporter (Sender)
-- 
+- Advanced Ender Pocket Computer
 
 ### Teleport Point (Receiver)
 - Water Buckets x7
