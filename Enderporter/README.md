@@ -4,12 +4,12 @@ Allows you to remotely trigger an enderporter, must be primed manually using pea
 ## Startup Scripts
 ### Teleporter (Sender)
 ```CraftOS
-# pastebin run KFyDjdN3
+pastebin run KFyDjdN3
 ```
 
 ### Teleport Point (Receiver)
 ```CraftOS
-# pastebin run F8ULkYNM
+pastebin run F8ULkYNM
 ```
 
 ## Required Items
