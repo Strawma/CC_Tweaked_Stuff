@@ -11,7 +11,7 @@ while true do
     repeat
         event, side, channel, replyChannel, message, distance = os.pullEvent("modem_message")
     until channel == CHANNEL
-    local cmd, location = message
+    local cmd, location = table.unpack(message)
     if cmd == "discover" then
         print("Received discover request")
         modem.transmit(CHANNEL, CHANNEL, {"discovery_response", NAME})

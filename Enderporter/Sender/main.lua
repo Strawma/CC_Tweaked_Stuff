@@ -36,7 +36,6 @@ local function discoverRequest()
         elseif eventData[1] == "modem_message" then
             local event, side, channel, replyChannel, message, distance = table.unpack(eventData)
             if channel == CHANNEL and message[1] == "discovery_response" then
-
                 table.insert(found, message[2])
             end
         end
