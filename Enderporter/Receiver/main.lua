@@ -13,12 +13,11 @@ while true do
     elseif network == LOCATION then
         print("Received command: " .. cmd)
         if cmd == "tp" then
-            turtle.select(16)
-            turtle.digDown()
-            turtle.suckDown()
-            turtle.dropUp()
-            turtle.suckUp()
-            turtle.select(1)
+            rs.setOutput("back", true)
+            rs.setOutput("down", true)
+            sleep(1)
+            rs.setOutput("back", false)
+            rs.setOutput("down", false)
         end
     end
 end
