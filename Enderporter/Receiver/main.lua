@@ -18,9 +18,9 @@ while true do
     elseif cmd == "tp" and location == NAME then
         print("Received command: " .. cmd)
         rs.setOutput("back", true)
-        rs.setOutput("down", true)
+        rs.setOutput("bottom", true)
         sleep(1)
         rs.setOutput("back", false)
-        rs.setOutput("down", false)
+        rs.setOutput("bottom", false)
     end
 end
