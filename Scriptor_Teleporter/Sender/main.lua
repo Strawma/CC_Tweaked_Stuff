@@ -1,6 +1,6 @@
 os.loadAPI("strawma_api.lua")
 local NETWORK = strawma_api.getNetwork()
-local MODEM = peripheral.find("modem")
+local MODEM = "back"
 
 local availableLocations
 
