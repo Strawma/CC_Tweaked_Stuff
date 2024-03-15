@@ -1,10 +1,11 @@
 os.loadAPI("strawma_api.lua")
 local NETWORK = strawma_api.getNetwork()
-local MODEM = peripheral.find("modem")
+local CHANNEL = strawma_api.networkToChannel(NETWORK)
 
 local availableLocations
 
-rednet.open(MODEM)
+local modem = peripheral.find("modem")
+modem.open(CHANNEL)
 
 local function constructLocations(found)
     if #found == 0 then
@@ -27,13 +28,17 @@ end
 local function discoverRequest()
     local timerID = os.startTimer(3) 
     local found = {}
-    rednet.broadcast("discover", NETWORK)
+    modem.transmit(CHANNEL, CHANNEL, {"discover", nil})
     while true do
-        local event, id, name, network = os.pullEvent()
-        if event == "timer" and id == timerID then
+        local eventData = {os.pullEvent()}
+        if eventData[1] == "timer" and eventData[2] == timerID then
             break
-        elseif event == "rednet_message" and network == NETWORK .. "discovery_response" then
-            table.insert(found, name)
+        elseif eventData[1] == "modem_message" then
+            local event, side, channel, replyChannel, message, distance = table.unpack(eventData)
+            if channel == CHANNEL and message[1] == "discovery_response" then
+
+                table.insert(found, message[2])
+            end
         end
     end
     local temp = constructLocations(found)
@@ -55,7 +60,7 @@ local function takeInput()
         displayText()
         local location = read()
         if location ~= nil then
-            rednet.broadcast("tp", NETWORK .. location)
+            modem.transmit(CHANNEL, CHANNEL, {"tp", location})
         end
     end
 end

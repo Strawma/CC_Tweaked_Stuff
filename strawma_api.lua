@@ -13,6 +13,15 @@ function getNetwork()
     return tryReadFile("NETWORK.txt")
 end
 
+function networkToChannel(network)
+    local hash = 0
+    for i = 1, #network do
+        local char = string.byte(network, i)
+        hash = (hash * 31 + char) % 65536
+    end
+    return hash
+end
+
 function writeFile(fileName, content)
     local file = fs.open(fileName, "w")
     file.write(content)
