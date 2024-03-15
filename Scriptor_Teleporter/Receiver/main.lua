@@ -1,5 +1,5 @@
 os.loadAPI("strawma_api.lua")
-local MODEM = peripheral.find("modem")
+local MODEM = "right"
 local NETWORK = strawma_api.getNetwork()
 local NAME = strawma_api.tryReadWriteFile("NAME.txt", "Enter location name: ")
 local LOCATION = NETWORK .. NAME
