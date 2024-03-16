@@ -47,13 +47,6 @@ local function discoverRequest()
     end
 end
 
-local function keepDiscovering()
-    while true do
-        discoverRequest()
-        sleep(10)
-    end
-end
-
 local function takeInput()
     while true do
         displayText()
@@ -68,7 +61,7 @@ local function run()
     strawma_api.refresh()
     print "Searching for locations..."
     discoverRequest()
-    parallel.waitForAny(keepDiscovering, takeInput)
+    takeInput()
 end
 
 run()
