@@ -21,4 +21,5 @@ while true do
         rs.setOutput("back", true)
         rs.setOutput("bottom", false)
     end
+    sleep(0.1)
 end

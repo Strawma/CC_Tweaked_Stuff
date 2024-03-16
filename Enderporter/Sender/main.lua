@@ -54,6 +54,7 @@ local function takeInput()
         if location ~= nil then
             modem.transmit(CHANNEL, CHANNEL, {"tp", location})
         end
+        sleep(0.1)
     end
 end
 
