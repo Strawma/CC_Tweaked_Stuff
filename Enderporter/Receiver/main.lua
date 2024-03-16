@@ -2,7 +2,6 @@ os.loadAPI("strawma_api.lua")
 local NETWORK = strawma_api.getNetwork()
 local CHANNEL = strawma_api.networkToChannel(NETWORK)
 local NAME = strawma_api.tryReadWriteFile("NAME.txt", "Enter location name: ")
-local LOCATION = NETWORK .. NAME
 
 local modem = peripheral.find("modem")
 modem.open(CHANNEL)
