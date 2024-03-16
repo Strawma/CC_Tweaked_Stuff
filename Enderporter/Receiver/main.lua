@@ -13,10 +13,8 @@ while true do
     until channel == CHANNEL
     local cmd, location = table.unpack(message)
     if cmd == "discover" then
-        print("Received discover request")
         modem.transmit(CHANNEL, CHANNEL, {"discovery_response", NAME})
     elseif cmd == "tp" and location == NAME then
-        print("Received command: " .. cmd)
         rs.setOutput("back", false)
         rs.setOutput("bottom", true)
         sleep(1)
